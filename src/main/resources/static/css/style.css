@@ -1,0 +1,776 @@
+.field-error {
+    display: block;
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.back-link {
+    margin-top: 16px;
+}
+
+.field-error:empty {
+    display: none;
+}
+
+#edit-task-form > label,
+#task-form > label {
+    display: inline-block;
+    margin-top: 12px;
+}
+
+.success-message {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    background-color: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 6px;
+    color: #166534;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* Общие настройки */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    color: #1e293b;
+}
+
+/* Страница авторизации */
+.auth-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #eff6ff, #f8fafc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 440px;
+}
+
+.auth-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: 0 16px 48px rgba(15, 23, 42, 0.08);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.app-logo {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 16px;
+    background: #2563eb;
+    color: #ffffff;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.auth-header h1 {
+    font-size: 28px;
+    margin: 0 0 10px;
+    letter-spacing: -0.5px;
+}
+
+.auth-header p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Поля формы */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* Уведомления */
+.alert {
+    padding: 13px 15px;
+    border-radius: 9px;
+    margin-bottom: 22px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.alert-success {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.alert-error {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+/* Ссылка регистрации */
+.auth-footer {
+    text-align: center;
+    margin: 24px 0 0;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.auth-footer a {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Адаптация для телефонов */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 28px 22px;
+    }
+
+    .auth-header h1 {
+        font-size: 24px;
+    }
+}
+
+.validation-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.validation-list li + li {
+    margin-top: 6px;
+}
+
+
+/* Страница списка задач */
+.dashboard-page {
+    min-height: 100vh;
+    background: #f5f7fb;
+}
+
+.dashboard-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.dashboard-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-actions form {
+    margin: 0;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.page-heading h1 {
+    font-size: 30px;
+    margin: 0 0 8px;
+}
+
+.page-heading p {
+    color: #64748b;
+    margin: 0;
+}
+
+.page-heading a {
+    text-decoration: none;
+}
+
+/* Дополнительные кнопки */
+.btn-secondary {
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+}
+
+.btn-secondary:hover {
+    background: #e2e8f0;
+}
+
+.btn-danger-outline {
+    background: #ffffff;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.btn-danger-outline:hover {
+    background: #fef2f2;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Таблица */
+.table-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+.tasks-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tasks-table th {
+    padding: 16px;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tasks-table td {
+    padding: 16px;
+    border-top: 1px solid #f1f5f9;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.tasks-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* Модальное окно */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 32px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
+}
+
+.modal-danger-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #fee2e2;
+    color: #dc2626;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.modal-card h2 {
+    margin: 0 0 12px;
+    font-size: 22px;
+}
+
+.modal-card p {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+/* Скрытые уведомления */
+.alert[hidden] {
+    display: none;
+}
+
+/* Адаптация */
+@media (max-width: 700px) {
+    .dashboard-header-inner,
+    .page-heading {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header-actions {
+        flex-wrap: wrap;
+    }
+
+    .dashboard-container {
+        padding: 24px 16px;
+    }
+
+    .page-heading h1 {
+        font-size: 25px;
+    }
+
+    .modal-card {
+        padding: 24px;
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .modal-actions .btn {
+        width: 100%;
+    }
+}
+
+
+/* Цветные статусы и приоритеты */
+.task-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-todo {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.status-in_progress {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-done {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.priority-low {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.priority-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.priority-high {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Кнопки действий */
+.task-actions {
+    white-space: nowrap;
+}
+
+.task-actions .btn + .btn {
+    margin-left: 8px;
+}
+
+.btn-small {
+    padding: 8px 12px;
+    font-size: 12px;
+}
+
+/* Пустой список задач */
+.empty-state {
+    text-align: center;
+    padding: 48px 20px !important;
+    color: #64748b;
+    font-size: 15px !important;
+}
+
+/* Длинные названия и описания */
+.tasks-table td {
+    overflow-wrap: anywhere;
+}
+
+.tasks-table td:nth-child(2),
+.tasks-table td:nth-child(3) {
+    max-width: 300px;
+}
+
+
+/* Страница создания и редактирования задач */
+
+.form-page-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 24px 70px;
+}
+
+.form-page-heading {
+    margin-bottom: 28px;
+}
+
+.form-back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.form-back-link:hover {
+    text-decoration: underline;
+}
+
+.form-page-heading h1 {
+    margin: 0 0 8px;
+    color: #0f172a;
+    font-size: 30px;
+}
+
+.form-page-heading p {
+    margin: 0;
+    color: #64748b;
+}
+
+.task-form-card {
+    background: #ffffff;
+    padding: 36px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+.task-form-card .form-group {
+    margin-bottom: 24px;
+    min-width: 0;
+}
+
+.task-form-card .form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.task-form-card input,
+.task-form-card textarea,
+.task-form-card select {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #0f172a;
+    font: inherit;
+}
+
+.task-form-card textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.task-form-card input:focus,
+.task-form-card textarea:focus,
+.task-form-card select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.task-form-card .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.task-form-card .field-error {
+    margin-bottom: 0;
+}
+
+.task-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    padding-top: 22px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.task-form-actions .btn {
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .form-page-container {
+        padding: 24px 16px 48px;
+    }
+
+    .task-form-card {
+        padding: 22px;
+    }
+
+    .task-form-card .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .task-form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .task-form-actions .btn {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}
+
+/* Компактное отображение формы на невысоких экранах */
+/* Компактная форма для невысоких экранов */
+@media (max-height: 850px) and (min-width: 601px) {
+
+    .form-page-container {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .form-page-heading {
+        margin-bottom: 12px;
+    }
+
+    .form-page-heading h1 {
+        font-size: 26px;
+    }
+
+    .form-back-link {
+        margin-bottom: 10px;
+    }
+
+    .task-form-card {
+        padding: 18px 28px;
+    }
+
+    .task-form-card .form-group {
+        margin-bottom: 10px;
+    }
+
+    .task-form-card .form-group label {
+        margin-bottom: 6px;
+    }
+
+    .task-form-card input,
+    .task-form-card select,
+    .task-form-card textarea {
+        padding: 10px 12px;
+    }
+
+    .task-form-card textarea {
+        min-height: 60px;
+    }
+
+    .task-form-actions {
+        padding-top: 12px;
+    }
+}
+
+@media (max-height: 850px) and (min-width: 601px) {
+    .dashboard-header-inner {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .form-page-container {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .form-page-heading {
+        margin-bottom: 8px;
+    }
+
+    .form-back-link {
+        margin-bottom: 6px;
+    }
+
+    .task-form-card {
+        padding: 14px 24px;
+    }
+
+    .task-form-card .form-group {
+        margin-bottom: 8px;
+    }
+
+    .task-form-card textarea {
+        min-height: 48px;
+        height: 48px;
+    }
+
+    .task-form-actions {
+        padding-top: 8px;
+    }
+}
+
+.page-error:not([hidden]) {
+    display: block;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Запрещаем перенос ID задачи на новую строку */
+#tasks-table-body td:first-child {
+    white-space: nowrap;
+    min-width: 45px;
+}
