@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.tarkovskiy.taskmanager.dto.RegisterRequestDto;
 import ru.tarkovskiy.taskmanager.service.UserService;
 import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -17,6 +19,12 @@ public class AuthController {
         this.userService = userService;
     }
 
+    @Parameter(
+            name = "X-CSRF-TOKEN",
+            in = ParameterIn.HEADER,
+            required = true,
+            description = "CSRF-токен"
+    )
     @PostMapping("/register")
     public ResponseEntity<String> register(
             @Valid

@@ -1,6 +1,7 @@
 
 package ru.tarkovskiy.taskmanager.controller;
 
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import org.springframework.web.bind.annotation.*;
 import ru.tarkovskiy.taskmanager.exception.TaskNotFoundException;
 import ru.tarkovskiy.taskmanager.service.TaskService;
@@ -12,6 +13,8 @@ import ru.tarkovskiy.taskmanager.service.UserService;
 import ru.tarkovskiy.taskmanager.model.User;
 import jakarta.validation.Valid;
 import java.util.List;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -25,6 +28,12 @@ public class TaskApiController {
         this.userService = userService;
     }
 
+    @Parameter(
+            name = "X-CSRF-TOKEN",
+            in = ParameterIn.HEADER,
+            required = true,
+            description = "CSRF-токен"
+    )
     @PostMapping
     public Task createTask(@Valid @RequestBody TaskRequestDto dto,
                            Authentication authentication) {
@@ -59,6 +68,12 @@ public class TaskApiController {
         return taskService.getTasksByUsername(username);
     }
 
+    @Parameter(
+            name = "X-CSRF-TOKEN",
+            in = ParameterIn.HEADER,
+            required = true,
+            description = "CSRF-токен"
+    )
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable Long id,
                            @Valid @RequestBody TaskRequestDto dto,
@@ -76,6 +91,12 @@ public class TaskApiController {
         return taskService.updateTaskByUsername(id, task, username);
     }
 
+    @Parameter(
+            name = "X-CSRF-TOKEN",
+            in = ParameterIn.HEADER,
+            required = true,
+            description = "CSRF-токен"
+    )
     @DeleteMapping("/{id}")
     public void deleteTask(
             @PathVariable Long id,
