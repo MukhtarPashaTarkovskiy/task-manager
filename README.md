@@ -68,9 +68,9 @@
 
 [📖 Swagger UI (localhost)](http://localhost:8080/swagger-ui/index.html)
 
-Спецификация OpenAPI: `http://localhost:8080/v3/api-docs`.
+[🌐 Swagger UI (Render)](https://task-manager-kqoi.onrender.com/swagger-ui/index.html)
 
-> Публичную ссылку на Swagger для Render стоит добавить после публикации текущих изменений и проверки, что документация доступна в развёрнутой версии.
+Спецификация OpenAPI: `http://localhost:8080/v3/api-docs`.
 
 ---
 
