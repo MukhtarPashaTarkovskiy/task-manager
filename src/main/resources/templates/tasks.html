@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои задачи — Task Manager</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+</head>
+<body class="dashboard-page">
+
+<header class="dashboard-header">
+    <div class="dashboard-header-inner">
+        <a class="brand" th:href="@{/tasks}">
+            <span class="brand-icon">✓</span>
+            <span>Task Manager</span>
+        </a>
+
+        <div class="header-actions">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-secondary">
+                    Выйти
+                </button>
+            </form>
+
+            <button type="button"
+                    id="delete-account-btn"
+                    class="btn btn-danger-outline">
+                Удалить аккаунт
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="dashboard-container">
+
+    <div class="page-heading">
+        <div>
+            <h1>Мои задачи</h1>
+            <p>Создавайте задачи и отслеживайте их выполнение</p>
+        </div>
+
+        <a th:href="@{/tasks/new}" class="btn btn-primary">
+            + Создать задачу
+        </a>
+    </div>
+
+    <div id="page-error"
+         class="alert alert-error"
+         role="alert"
+         hidden>
+    </div>
+
+    <section class="table-card">
+        <div class="table-scroll">
+            <table class="tasks-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Статус</th>
+                    <th>Приоритет</th>
+                    <th>Срок</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody id="tasks-table-body"></tbody>
+            </table>
+        </div>
+    </section>
+
+</main>
+
+<!-- Подтверждение удаления аккаунта -->
+<div id="delete-account-modal"
+     class="modal-overlay"
+     hidden>
+
+    <div class="modal-card"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="delete-modal-title"
+         aria-describedby="delete-modal-description">
+
+        <div class="modal-danger-icon">!</div>
+
+        <h2 id="delete-modal-title">Удалить аккаунт?</h2>
+
+        <p id="delete-modal-description">
+            Все ваши задачи будут удалены без возможности
+            восстановления. Это действие нельзя отменить.
+        </p>
+
+        <div class="modal-actions">
+            <button type="button"
+                    id="cancel-delete-account"
+                    class="btn btn-secondary">
+                Отмена
+            </button>
+
+            <button type="button"
+                    id="confirm-delete-account"
+                    class="btn btn-danger">
+                Удалить аккаунт
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Подтверждение удаления задачи -->
+<div id="delete-task-modal" class="modal-overlay" hidden>
+    <div class="modal-card"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="delete-task-title"
+         aria-describedby="delete-task-description">
+
+        <div class="modal-danger-icon">!</div>
+
+        <h2 id="delete-task-title">Удалить задачу?</h2>
+
+        <p id="delete-task-description">
+            Вы действительно хотите удалить эту задачу?
+            Восстановить её после удаления будет невозможно.
+        </p>
+
+        <div class="modal-actions">
+            <button type="button"
+                    id="cancel-delete-task"
+                    class="btn btn-secondary">
+                Отмена
+            </button>
+
+            <button type="button"
+                    id="confirm-delete-task"
+                    class="btn btn-danger">
+                Удалить задачу
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/csrf.js}"></script>
+<script th:src="@{/js/tasks.js}"></script>
+<script>
+    const deleteButton = document.getElementById("delete-account-btn");
+    const modal = document.getElementById("delete-account-modal");
+    const cancelButton = document.getElementById("cancel-delete-account");
+    const confirmButton = document.getElementById("confirm-delete-account");
+    const accountError = document.getElementById("page-error");
+
+    function closeDeleteModal() {
+        modal.hidden = true;
+        deleteButton.focus();
+    }
+
+    deleteButton.addEventListener("click", () => {
+        accountError.hidden = true;
+        modal.hidden = false;
+        cancelButton.focus();
+    });
+
+    cancelButton.addEventListener("click", closeDeleteModal);
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            closeDeleteModal();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !modal.hidden) {
+            closeDeleteModal();
+        }
+    });
+
+    confirmButton.addEventListener("click", async () => {
+        confirmButton.disabled = true;
+        confirmButton.textContent = "Удаление...";
+
+        try {
+            const response = await fetch("/api/users/me", {
+                method: "DELETE"
+            });
+
+            if (response.ok) {
+                window.location.replace("/login?deleted");
+                return;
+            }
+
+            throw new Error("Не удалось удалить аккаунт");
+        } catch (error) {
+            closeDeleteModal();
+            accountError.textContent =
+                "Не удалось удалить аккаунт. Попробуйте ещё раз.";
+            accountError.hidden = false;
+        } finally {
+            confirmButton.disabled = false;
+            confirmButton.textContent = "Удалить аккаунт";
+        }
+    });
+</script>
+
+</body>
+</html>

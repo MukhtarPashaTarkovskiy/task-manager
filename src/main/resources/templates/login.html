@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — Task Manager</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="auth-page">
+
+<main class="auth-container">
+    <div class="auth-card">
+
+        <div class="auth-header">
+            <div class="app-logo">✓</div>
+            <h1>Task Manager</h1>
+            <p>Войдите, чтобы управлять своими задачами</p>
+        </div>
+
+        <div th:if="${param.error}" class="alert alert-error" role="alert">
+            Неверный логин или пароль
+        </div>
+
+        <div th:if="${param.logout}" class="alert alert-success" role="status">
+            Вы успешно вышли из аккаунта
+        </div>
+
+        <div th:if="${param.deleted}" class="alert alert-success" role="status">
+            Ваш аккаунт и все связанные с ним задачи успешно удалены.
+        </div>
+
+        <form th:action="@{/login}" method="post" class="auth-form">
+
+            <div class="form-group">
+                <label for="username">Логин</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       placeholder="Введите логин"
+                       autocomplete="username"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Введите пароль"
+                       autocomplete="current-password"
+                       required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+                Войти
+            </button>
+
+        </form>
+
+        <p class="auth-footer">
+            Нет аккаунта?
+            <a th:href="@{/register}">Зарегистрироваться</a>
+        </p>
+
+    </div>
+</main>
+
+</body>
+</html>
