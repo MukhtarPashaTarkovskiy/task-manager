@@ -27,6 +27,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/",
+                                "/api/csrf",
                                 "/api/auth/register",
                                 "/register",
                                 "/login",
