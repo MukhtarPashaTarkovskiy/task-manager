@@ -35,6 +35,7 @@ public class SecurityConfig {
                                 "/css/**",
                                 "/js/**",
                                 "/favicon.ico",
+                                "/google25a3e4e2109f958d.html",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**"
