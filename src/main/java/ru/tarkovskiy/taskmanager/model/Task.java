@@ -18,6 +18,8 @@ public class Task {
             message = "Название задачи должно содержать от 3 до 100 символов")
     private String title;
 
+    @Size(max = 1000, message = "Описание не должно превышать 1000 символов")
+    @Column(length = 1000)
     private String description;
 
     @Enumerated(EnumType.STRING)
