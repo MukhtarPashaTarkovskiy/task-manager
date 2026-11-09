@@ -83,7 +83,7 @@
 
 ## 💻 Локальный запуск
 
-**Требования:** JDK 17, Maven (или Maven Wrapper из репозитория), PostgreSQL.
+**Требования:** JDK 17, Maven, PostgreSQL.
 
 1. Клонировать проект:
 
@@ -116,7 +116,7 @@
 5. Запустить приложение:
 
    ```powershell
-   .\mvnw.cmd spring-boot:run
+   mvn spring-boot:run
    ```
 
 6. Открыть [http://localhost:8080](http://localhost:8080).
@@ -167,7 +167,7 @@ Task Manager — **тестируемое приложение (AUT)**. Авто
 
 [🧪 task-manager-autotests](https://github.com/MukhtarPashaTarkovskiy/task-manager-autotests)
 
-Тестовый проект организован как многомодульный Maven-проект (`api-tests`, `ui-tests`). Для API-тестирования используются **REST Assured** и **TestNG**, для UI-тестирования — **Selenium** и **TestNG**. Для отчётности предусмотрен **Allure**, для автоматического запуска — **GitHub Actions**. Настройка и реализация автотестов продолжаются.
+Тестовый проект организован как многомодульный Maven-проект (`api-tests`, `ui-tests`). Для API-тестирования используются **REST Assured** и **TestNG**, для UI-тестирования — **Selenium** и **TestNG**. Отчётность формирует **Allure**. В отдельном репозитории **GitHub Actions на Ubuntu 24.04** запускает All по push в develop при `UBUNTU_CI_ENABLED=true`. Контрольный [автоматический запуск](https://github.com/MukhtarPashaTarkovskiy/task-manager-autotests/actions/runs/42570271886) завершился успешно: 127 выполнений и 117 уникальных вариантов в TEST.
 
 Автотесты должны выполняться против **тестового Render-сервиса**, а не основного приложения.
 
