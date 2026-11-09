@@ -83,7 +83,7 @@
 
 ## 💻 Локальный запуск
 
-**Требования:** JDK 17, Maven (или Maven Wrapper из репозитория), PostgreSQL.
+**Требования:** JDK 17, Maven, PostgreSQL.
 
 1. Клонировать проект:
 
@@ -116,7 +116,7 @@
 5. Запустить приложение:
 
    ```powershell
-   .\mvnw.cmd spring-boot:run
+   mvn spring-boot:run
    ```
 
 6. Открыть [http://localhost:8080](http://localhost:8080).
@@ -134,11 +134,10 @@
 | Файл конфигурации | `application-prod.properties` | `application-test.properties` |
 | База данных | Основная Neon PostgreSQL | Отдельная `task_manager_test` в Neon |
 | Переменные подключения | `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` | `TEST_DB_URL`, `TEST_DB_USERNAME`, `TEST_DB_PASSWORD` |
-| Ветка развёртывания (целевая схема) | `master` | `develop` |
 
 Профиль выбирается через `SPRING_PROFILES_ACTIVE`. Сборка и запуск выполняются с помощью Docker. **Пароли и другие секреты задаются в переменных окружения Render и не публикуются в Git.**
 
-> **Важно:** схема веток `master` / `develop` является целевой. До завершения настройки оба Render-сервиса могут отслеживать `develop`. После слияния проверенных изменений в `master` основной сервис будет переключён на `master`, а тестовый останется на `develop`.
+> Привязка Git-ветки и режим автодеплоя задаются отдельно для каждого сервиса в Render Dashboard.
 
 ### Изоляция тестирования
 
@@ -167,7 +166,9 @@ Task Manager — **тестируемое приложение (AUT)**. Авто
 
 [🧪 task-manager-autotests](https://github.com/MukhtarPashaTarkovskiy/task-manager-autotests)
 
-Тестовый проект организован как многомодульный Maven-проект (`api-tests`, `ui-tests`). Для API-тестирования используются **REST Assured** и **TestNG**, для UI-тестирования — **Selenium** и **TestNG**. Для отчётности предусмотрен **Allure**, для автоматического запуска — **GitHub Actions**. Настройка и реализация автотестов продолжаются.
+Тестовый проект использует Maven-модули `api-tests` и `ui-tests`, REST Assured, Selenium, TestNG и Allure. GitHub Actions на Ubuntu 24.04 запускает All по push в `main` и по push в `develop` при `UBUNTU_CI_ENABLED=true`. Внутренние PR в `main` проверяет Smoke. Ручной запуск поддерживает Smoke, Regression и All на обеих ветках. Автоматические запуски в [develop](https://github.com/MukhtarPashaTarkovskiy/task-manager-autotests/actions/runs/42570271886) и [main](https://github.com/MukhtarPashaTarkovskiy/task-manager-autotests/actions/runs/42644411463) подтвердили **127/127 PASS** и **117 уникальных вариантов** в TEST.
+
+![Allure Combined-All — 127 Passed, 0 Failed, 0 Skipped, 100%](https://raw.githubusercontent.com/MukhtarPashaTarkovskiy/task-manager-autotests/main/docs/images/allure-overview-main-127-pass.png)
 
 Автотесты должны выполняться против **тестового Render-сервиса**, а не основного приложения.
 
